@@ -25,10 +25,20 @@ namespace Aula_02
 
         public string GetValor(string parametro)
         {
-            int indiceParametro = URL.IndexOf(parametro);
-            int indiceValor = indiceParametro + parametro.Length;
-            string valorArgumento = URL.Substring(indiceParametro + 1);
-            return valorArgumento;
+            string termo = parametro.ToUpper() + "=";
+            string argumentoEmCaixaAlta = _argumentos.ToUpper();
+
+            int indiceTermo = argumentoEmCaixaAlta.IndexOf(termo);
+            int indiceValor = indiceTermo + termo.Length;
+
+            string resultado = _argumentos.Substring(indiceValor);
+            int indiceEComercial = resultado.IndexOf("&");
+
+            if(indiceEComercial == -1)
+            {
+                return resultado;
+            }
+            return resultado.Remove(indiceEComercial);
         }
     }
 }
